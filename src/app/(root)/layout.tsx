@@ -1,3 +1,4 @@
+import Header from "@/components/Header";
 import { ClerkProvider } from "@clerk/nextjs";
 
 export default function RootLayout({
@@ -8,6 +9,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
         <main>
+            <Header />
             {children}
         </main>
     </ClerkProvider>
