@@ -4,6 +4,7 @@ import Image from 'next/image';
 import React from 'react'
 import { urlFor } from '@/sanity/lib/image';
 import { PortableText } from 'next-sanity';
+import AddToBasket from '@/components/AddToBasket';
 
 type Props = {
     params: Promise<{ slug: string }>
@@ -31,7 +32,7 @@ async function page({ params }: Props) {
                 )}
             </div>
 
-            <div className='flex flex-col justify-between'>
+            <div className='flex flex-col space-y-5'>
                 <div>
                     <h1 className='text-3xl font-bold mb-4'>
                         {product.name}
@@ -45,6 +46,8 @@ async function page({ params }: Props) {
                         )}
                     </div>
                 </div>
+
+                <AddToBasket product={product} />
             </div>
         </div>
     </div>

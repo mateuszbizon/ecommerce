@@ -5,9 +5,14 @@ import Link from 'next/link'
 import React from 'react'
 import Form from "next/form"
 import { PackageIcon, TrolleyIcon } from '@sanity/icons'
+import useBasketStore from '@/store/basket'
 
 function Header() {
     const { user } = useUser()
+    // const itemCount = useBasketStore((state) => {
+    //     return state.items.reduce((total, item) => total + item.quantity, 0)
+    // })
+    const { getAllItemsQuantity } = useBasketStore()
 
   return (
     <header className='flex flex-wrap justify-between items-center px-4 py-2'>
@@ -25,6 +30,9 @@ function Header() {
                 <Link href={"/basket"} className='flex-1 relative flex justify-center sm:justify-start sm:flex-none items-center space-x-2 bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded'>
                     <TrolleyIcon className='size-6' />
                     <span>My Basket</span>
+                    <div className='absolute -top-2 -right-2 flex justify-center items-center size-5 rounded-full bg-red-500 text-white text-xs'>
+                        <span>{getAllItemsQuantity()}</span>
+                    </div>
                 </Link>
 
                 <ClerkLoaded>
