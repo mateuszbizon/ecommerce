@@ -1,6 +1,7 @@
 "use client"
 
 import AddToBasket from '@/components/AddToBasket'
+import { CheckoutData, createCheckoutSession } from '@/lib/actions/createCheckoutSession'
 import { urlFor } from '@/sanity/lib/image'
 import useBasketStore from '@/store/basket'
 import { SignInButton, useAuth, useUser } from '@clerk/nextjs'
@@ -32,6 +33,25 @@ function page() {
         if (!isSignedIn) return
 
         setIsLoading(true)
+
+        try {
+            const data: CheckoutData = {
+                orderNumber: crypto.randomUUID(),
+                customerName: user?.fullName || "Unknown",
+                customerEmail: user?.emailAddresses[0].emailAddress || "Unknown",
+                clerkUserId: user!.id
+            }
+
+            const checkoutUrl = await createCheckoutSession(getGroupedItems(), data)
+
+            if (checkoutUrl) {
+                window.location.href = checkoutUrl
+            }
+        } catch (error) {
+            console.error("Error creating checkout: ", error)
+        } finally {
+            setIsLoading(false)
+        }
     }
 
   return (

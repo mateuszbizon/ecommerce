@@ -53,7 +53,7 @@ const useBasketStore = create<BasketState>()(
             })),
             getTotalPrice: () => {
                 return get().items.reduce((acc, item) => {
-                    return acc + (item.product.price ?? 0 * item.quantity)
+                    return acc + ((item.product.price ?? 0) * item.quantity)
                 }, 0)
             },
             getItemCount: (productId) => {
