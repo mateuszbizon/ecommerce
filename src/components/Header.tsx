@@ -37,7 +37,7 @@ function Header() {
 
                 <ClerkLoaded>
                     <SignedIn>
-                        <Link href={"/my-orders"} className='flex-1 relative flex justify-center sm:justify-start sm:flex-none items-center space-x-2 bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded'>
+                        <Link href={"/orders"} className='flex-1 relative flex justify-center sm:justify-start sm:flex-none items-center space-x-2 bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded'>
                             <PackageIcon className='size-6' />
                             <span>My Orders</span>
                         </Link>
