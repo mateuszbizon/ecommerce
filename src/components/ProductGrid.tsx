@@ -19,7 +19,7 @@ function ProductGrid({ products }: ProductGridProps) {
                     initial={{ opacity: 0.2 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className='flex justify-center'
+                    className=''
                 >
                     <ProductThumb product={product} />
                 </motion.div>

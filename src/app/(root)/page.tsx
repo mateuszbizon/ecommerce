@@ -13,7 +13,7 @@ export default async function Home() {
         <Suspense fallback={<p>Loading...</p>}>
             <BlackFridayBanner />
         </Suspense>
-        <div className="flex flex-col items-center min-h-screen bg-gray-100 p-4">
+        <div className="min-h-screen bg-gray-100 p-4">
             <ProductsView products={products} categories={categories} />
         </div>
     </>
