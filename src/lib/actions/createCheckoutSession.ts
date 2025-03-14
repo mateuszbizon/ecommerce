@@ -46,8 +46,8 @@ export async function createCheckoutSession(items: GroupedBasketItem[], data: Ch
             metadata: data,
             mode: "payment",
             allow_promotion_codes: true,
-            success_url: `http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}&orderNumber=${data.orderNumber}`,
-            cancel_url: "http://localhost:3000/basket",
+            success_url: `${process.env.BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}&orderNumber=${data.orderNumber}`,
+            cancel_url: `${process.env.BASE_URL}/basket`,
             line_items: items.map(item => ({
                 quantity: item.quantity,
                 price_data: {
