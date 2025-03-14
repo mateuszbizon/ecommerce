@@ -4,6 +4,7 @@ import Stripe from "stripe";
 import { CheckoutData } from "./createCheckoutSession";
 import stripe from "../stripe";
 import { backendClient } from "@/sanity/lib/backendClient";
+import { getProductById } from "@/sanity/lib/products/getProductById";
 
 export async function createOrder(session: Stripe.Checkout.Session) {
     const {
@@ -50,6 +51,16 @@ export async function createOrder(session: Stripe.Checkout.Session) {
         status: "paid",
         orderDate: new Date().toISOString(),
     })
+
+    for (const product of products) {
+        const currentProduct = await getProductById(product.product._ref)
+
+       if (currentProduct) {
+            await backendClient.patch(product.product._ref).set({
+                stock: currentProduct.stock! - product.quantity
+            }).commit()
+        }
+    }
 
     return order
 }
